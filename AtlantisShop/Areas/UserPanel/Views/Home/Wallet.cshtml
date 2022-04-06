@@ -1,0 +1,118 @@
+﻿@model AtlantisShop.Core.ViewModels.WalletListViewModel
+@{
+    ViewData["Title"] = "کیف پول";
+    Layout = "~/Views/Shared/_PanelLayout.cshtml";
+}
+@using AtlantisShop.Core.Convertors;
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card card-plain">
+                    <div class="card-header card-header-primary">
+                        <h4 class="card-title mt-0"> لیست تراکنش های شما</h4>
+                        <p class="card-category">اعتبار شما در حال حاضر برابر است با : @(Convert.ToInt32(ViewBag.WalletAmount).ToString("N0")) تومان</p>
+                    </div>
+                    <div class="card-body">
+                        <p>تعداد آیتم ها در هر صفحه</p>
+                        <form>
+                            <div class="form-inline">
+                                <div class="col-md-4">
+                                    <input type="number" value="@ViewBag.Take" name="Take" class="form-control" required />
+                                </div>
+                                <div class="col-md-4">
+                                    <input type="submit" class="btn btn-info" value="اعمال" />
+                                </div>
+                            </div>
+                        </form>
+
+                        <div class="table-responsive">
+
+                            @if (Model.Count <= 0)
+                            {
+                                <p class="alert alert-warning">موردی یافت نشد</p>
+                            }
+
+                            <table class="table table-hover">
+                                <thead class="">
+                                    <tr>
+                                        <th>
+                                            شماره تراکنش
+                                        </th>
+                                        <th>
+                                            تاریخ
+                                        </th>
+                                        <th>
+                                            مبلغ (تومان)
+                                        </th>
+                                        <th>
+                                            وضعیت
+                                        </th>
+                                        <th>
+                                            نوع تراکنش
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model.Wallets)
+                                    {
+                                        <tr>
+                                            <td>
+                                                @item.WalletId
+                                            </td>
+                                            <td>
+                                                @item.CreateDate.ToShamsi()
+                                            </td>
+                                            <td>
+                                                @item.Amount.ToString("N0")
+                                            </td>
+                                            <td>
+                                                @if (item.IsPay == true)
+                                                {
+                                                    <span class="text-success">پرداخت شده</span>
+                                                }
+                                                else
+                                                {
+                                                    <span class="text-danger">در انتظار</span>
+                                                }
+                                            </td>
+                                            <td>
+                                                @item.WalletType.WalletTypeTitle
+                                            </td>
+                                        </tr>
+                                    }
+
+
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="btn-group center-block">
+
+                            @if (Model.CurrentPage > 1)
+                            {
+                                <a href="/UserPanel/Home/Wallet?PageId=1&Take=@ViewBag.Take" class="btn btn-default">اولین</a>
+                                <a href="/UserPanel/Home/Wallet?PageId=@(Model.CurrentPage-1)&Take=@ViewBag.Take" class="btn btn-default">قبلی</a>
+                            }
+
+                            @for (int i = 1; i <= Model.PageCount; i++)
+                            {
+                                <a href="/UserPanel/Home/Wallet?PageId=@i&Take=@ViewBag.Take" class=" @((i==Model.CurrentPage)?"btn btn-info":"btn btn-default")">
+                                    @i
+                                </a>
+                            }
+
+                            @if (Model.CurrentPage < Model.PageCount)
+                            {
+                                <a href="/UserPanel/Home/Wallet?PageId=@(Model.CurrentPage+1)&Take=@ViewBag.Take" class="btn btn-default">بعدی</a>
+                                <a href="/UserPanel/Home/Wallet?PageId=@(Model.PageCount)&Take=@ViewBag.Take" class="btn btn-default">آخرین</a>
+                            }
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

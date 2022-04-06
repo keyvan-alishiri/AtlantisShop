@@ -1,0 +1,154 @@
+﻿@model AtlantisShop.Core.ViewModels.EditUserViewModel
+@{
+    ViewData["Title"] = "ویرایش حساب کاربری";
+    Layout = "~/Views/Shared/_PanelLayout.cshtml";
+}
+
+<head>
+    
+    <script src="~/MainContent/js/jquery-2.1.1.min.js"></script>
+
+    <!-- ir-city-select.js -->
+    <script src="~/MainContent/js/ir-city-select.min.js"></script>
+</head>
+
+<div class="content">
+    <div class="container-fluid">
+        <form method="post" enctype="multipart/form-data">
+
+            <div class="row">
+
+                <div class="col-md-8">
+                    @if (!string.IsNullOrEmpty(ViewBag.Message))
+                    {
+                        <div class="row">
+                            <p class="@ViewBag.Class">@ViewBag.Message</p>
+                        </div>
+                    }
+
+                    <div class="card">
+                        <div class="card-header card-header-primary">
+                            <h4 class="card-title">ویرایش اطلاعات کاربری</h4>
+                            <p class="card-category"></p>
+                        </div>
+                        <div class="card-body">
+
+
+                            <div class="row">
+
+                                <div class="col-md-3">
+                                    <div class="form-group bmd-form-group">
+                                        <label class="bmd-label-floating">نام</label>
+                                        <input asp-for="FirstName" type="text" class="form-control">
+                                    </div>
+                                    <span asp-validation-for="FirstName" class="text-danger"></span>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group bmd-form-group">
+                                        <label class="bmd-label-floating">نام خانوادگی</label>
+                                        <input asp-for="LastName" class="form-control">
+                                    </div>
+                                    <span asp-validation-for="LastName" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group bmd-form-group">
+                                        <label class="bmd-label-floating">شماره موبایل</label>
+                                        <input asp-for="Mobile" type="text" class="form-control">
+                                    </div>
+                                    <span asp-validation-for="Mobile" class="text-danger"></span>
+                                </div>
+
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group bmd-form-group">
+                                        <label class="bmd-label-floating">شماره تلفن</label>
+                                        <input asp-for="Tell" type="text" class="form-control">
+                                    </div>
+                                    <span asp-validation-for="Tell" class="text-danger"></span>
+                                </div>
+
+                            </div>
+
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group bmd-form-group">
+                                        <label class="bmd-label-floating">کد پستی</label>
+                                        <input asp-for="PostalCode" type="text" class="form-control">
+                                    </div>
+                                    <span asp-validation-for="PostalCode" class="text-danger"></span>
+                                </div>
+
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group bmd-form-group">
+                                        <label class="bmd-label-floating">آدرس</label>
+                                        <textarea asp-for="Address1" class="form-control"></textarea>
+                                    </div>
+                                    <span asp-validation-for="Address1" class="text-danger"></span>
+                                </div>
+
+                            </div>
+
+                            <hr />
+                            <p>استان شما : @Model.State</p>
+                            <p>شهر شما : @Model.City</p>
+                            <p>چنانچه قصد تغییر استان و شهر خود را دارید از آیتم های زیر استفاده کنید</p>
+
+                            <div class="ir-select">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group bmd-form-group">
+                                            <label class="">استان</label>
+                                            <select asp-for="State" class="ir-province form-control"></select>
+                                        </div>
+                                        <span asp-validation-for="State" class="text-danger"></span>
+                                    </div>
+
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group bmd-form-group">
+                                            <label class="">شهر</label>
+                                            <select asp-for="City" class="ir-city form-control"></select>
+                                        </div>
+                                        <span asp-validation-for="City" class="text-danger"></span>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-success btn-round  pull-right">ذخیره اطلاعات</button>
+                            <div class="clearfix"></div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card card-profile">
+                        <div class="card-avatar">
+                            <a href="#pablo">
+                                <img class="img" src="~/PanelContent/UserAvatars/@Model.UserOldAvatar">
+
+                                <input type="hidden" asp-for="UserOldAvatar" />
+                            </a>
+                        </div>
+                        <div class="card-body">
+                            <p>اگر میخواهید تصویر پروفایل خود را تغییر دهید، در این قسمت عکس جدید را انخاب کنید</p>
+                            <input asp-for="UserProfile" />
+                            <p class="help text-danger">انتخاب عکس جهت پروفایل کاربری</p>
+                            <span asp-validation-for="UserProfile" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </form>
+    </div>
+</div>
+

@@ -1,0 +1,138 @@
+﻿@model AtlantisShop.Core.ViewModels.RegisterViewModel
+@{
+    ViewData["Title"] = "ثبت نام";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<head>
+    <script src="~/MainContent/js/jquery-2.1.1.min.js"></script>
+
+   
+    <!-- ir-city-select.js -->
+    <script src="~/MainContent/js/ir-city-select.min.js"></script>
+</head>
+
+<div id="container">
+    <div class="container">
+        <!-- Breadcrumb Start-->
+        <ul class="breadcrumb">
+            <li><a asp-controller="Home" asp-action="Index"><i class="fa fa-home"></i></a></li>
+            <li><a href="/Login">حساب کاربری</a></li>
+            <li><a href="/Register">ثبت نام</a></li>
+        </ul>
+        <!-- Breadcrumb End-->
+        <div class="row">
+            <!--Middle Part Start-->
+            <div class="col-sm-9" id="content">
+                @if (!string.IsNullOrEmpty(ViewBag.Message))
+                {
+                    <p class="alert alert-info">@ViewBag.Message</p>
+                }
+                <h1 class="title">ثبت نام حساب کاربری</h1>
+                <p>اگر قبلا حساب کاربریتان را ایجاد کرد اید جهت ورود به <a href="/Login">صفحه لاگین</a> مراجعه کنید.</p>
+                
+                <form method="post" class="form-horizontal">
+                    <fieldset id="account">
+                        <legend>اطلاعات شخصی شما</legend>
+
+                        <div class="form-group required">
+                            <label for="input-firstname" class="col-sm-2 control-label">نام</label>
+                            <div class="col-sm-10">
+                                <input asp-for="FirstName" type="text" class="form-control" id="input-firstname" placeholder="نام" value="">
+                                <span asp-validation-for="FirstName" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group required">
+                            <label for="input-lastname" class="col-sm-2 control-label">نام خانوادگی</label>
+                            <div class="col-sm-10">
+                                <input asp-for="LastName" type="text" class="form-control" id="input-lastname" placeholder="نام خانوادگی" value="">
+                                <span asp-validation-for="LastName" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group required">
+                            <label for="input-email" class="col-sm-2 control-label">آدرس ایمیل</label>
+                            <div class="col-sm-10">
+                                <input asp-for="Email" type="email" class="form-control" id="input-email" placeholder="آدرس ایمیل" value="">
+                                <span asp-validation-for="Email" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="input-telephone" class="col-sm-2 control-label">شماره تلفن</label>
+                            <div class="col-sm-10">
+                                <input asp-for="Tell" type="tel" class="form-control" id="input-telephone" placeholder="شماره تلفن" value="">
+                                <span asp-validation-for="Tell" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group required">
+                            <label for="input-telephone" class="col-sm-2 control-label">شماره موبایل</label>
+                            <div class="col-sm-10">
+                                <input asp-for="Mobile" type="tel" class="form-control" id="input-telephone" placeholder="شماره موبایل" value="">
+                                <span asp-validation-for="Mobile" class="text-danger"></span>
+                            </div>
+                        </div>
+                       
+                    </fieldset>
+                    <fieldset id="address">
+                        <legend>آدرس</legend>
+
+                        <div class="form-group ir-select required">
+                            <label for="input-company" class="col-sm-2 control-label">استان</label>
+                            <div class="col-sm-10">
+                                <select asp-for="State" class="ir-province form-control"></select>
+                            </div>
+                            <br />
+                            <br />
+                            <label for="input-address-1" class="col-sm-2 control-label">شهر</label>
+                            <div class="col-sm-10">
+                                <select asp-for="City" class="ir-city form-control"></select>
+                            </div>
+                        </div>
+                      
+                        <div class="form-group required">
+                            <label for="input-city" class="col-sm-2 control-label">کد پستی</label>
+                            <div class="col-sm-10">
+                                <input asp-for="PostalCode" type="text" class="form-control" id="input-city" placeholder="کد پستی" value="">
+                            </div>
+                        </div>
+                        <div class="form-group required">
+                            <label for="input-postcode" class="col-sm-2 control-label">آدرس پستی</label>
+                            <div class="col-sm-10">
+                                <textarea asp-for="Address1" class="form-control" placeholder="خیابان تهران کوچه 4 پلاک 5"></textarea>
+                            </div>
+                        </div>
+                        
+                    </fieldset>
+                    <fieldset>
+                        <legend>رمز عبور شما</legend>
+                        <div class="form-group required">
+                            <label for="input-password" class="col-sm-2 control-label">رمز عبور</label>
+                            <div class="col-sm-10">
+                                <input asp-for="Password" type="password" class="form-control" id="input-password" placeholder="رمز عبور" value="">
+                                <span asp-validation-for="Password" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group required">
+                            <label for="input-confirm" class="col-sm-2 control-label">تکرار رمز عبور</label>
+                            <div class="col-sm-10">
+                               
+                                <input asp-for="ConfirmPassword" type="password" class="form-control" id="input-confirm" placeholder="تکرار رمز عبور" value="">
+                                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </fieldset>
+                    
+                    <div class="buttons">
+                        <div class="pull-right">
+                            <input type="checkbox" value="1" name="agree">
+                            &nbsp;من <a class="agree" href="#"><b>سیاست حریم خصوصی</b> را خوانده ام و با آن موافق هستم</a> &nbsp;
+                            <input type="submit" class="btn btn-primary" value="ادامه">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <!--Middle Part End -->
+            
+        </div>
+    </div>
+</div>
+
